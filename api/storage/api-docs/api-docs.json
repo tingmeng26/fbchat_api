@@ -1,0 +1,396 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "\u8c9d\u591a\u82ac250\u5e74\u7dda\u4e0a\u6d3b\u52d5 API\u6587\u4ef6",
+        "description": "API\u898f\u683c\u66f8,\u767b\u5165\u72c0\u614bHeader\u5e36Authorization \u6703\u54e1 access token",
+        "termsOfService": "coder",
+        "version": "1.0.0"
+    },
+    "host": "localhost/beethoven/",
+    "basePath": "api/public/api/",
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "consumes": [
+        "application/x-www-form-urlencoded",
+        "application/json",
+        "multipart/form-data"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/city": {
+            "get": {
+                "tags": [
+                    "APP - \u6703\u54e1"
+                ],
+                "summary": "\u7e23\u5e02",
+                "description": "\u53d6\u5f97\u7e23\u5e02(\u901a\u8def)\u540d\u7a31\u53ca\u7e23\u5e02\u4ee3\u78bc\u9078\u55ae\uff0c\u7528\u4ee5\u53d6\u5f97\u8a72\u7e23\u5e02\u5b78\u6821(\u55ae\u4f4d)\uff0c",
+                "responses": {
+                    "200": {
+                        "description": "SUCCESS,\u6b63\u5e38\u767b\u5165\u60c5\u6cc1",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "description": "\u56de\u50b3\u7d50\u679c(true|false)",
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "code": {
+                                                "description": "\u7e23\u5e02\u4ee3\u78bc",
+                                                "type": "string"
+                                            },
+                                            "name": {
+                                                "description": "\u7e23\u5e02\u540d\u7a31",
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                },
+                                "msg": {
+                                    "description": "\u72c0\u614b\u4ee3\u78bc\u7684\u6587\u5b57\u8aaa\u660e",
+                                    "type": "string"
+                                },
+                                "msgcode": {
+                                    "description": "\u72c0\u614b\u4ee3\u78bc",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "HTTP 401 Error (\u8eab\u5206\u9a57\u8b49\u6388\u6b0a\u5931\u6557)"
+                    },
+                    "403": {
+                        "description": "HTTP 403 Error (\u64cd\u4f5c\u5931\u6557)"
+                    },
+                    "404": {
+                        "description": "HTTP 404 Error (\u67e5\u7121\u6307\u5b9a\u9801\u9762)"
+                    },
+                    "405": {
+                        "description": "HTTP 405 Error (HTTP Request Method\u932f\u8aa4)"
+                    },
+                    "500": {
+                        "description": "HTTP 500 Error (\u4f3a\u670d\u5668\u932f\u8aa4)"
+                    }
+                }
+            }
+        },
+        "/school/{code}": {
+            "get": {
+                "tags": [
+                    "APP - \u6703\u54e1"
+                ],
+                "summary": "\u5b78\u6821",
+                "description": "\u8f38\u5165\u7e23\u5e02\u4ee3\u78bc\u53d6\u5f97\u6240\u6709\u5b78\u6821(\u55ae\u4f4d)\uff0c\u4e26\u56de\u50b3\u5404\u5b78\u6821\u6aa2\u6aa2\u78bc\uff0c\u8acb\u524d\u7aef\u65bc\u547c\u53eb/login api\u524d\u5148\u884c\u78ba\u8a8d\u8a72\u5b78\u6821\u6aa2\u6838\u78bc\u8207\u767b\u5165\u4e4b\u5e8f\u865f\u524d3\u78bc\u662f\u5426\u76f8\u540c",
+                "parameters": [
+                    {
+                        "name": "code",
+                        "in": "path",
+                        "description": "\u7e23\u5e02\u4ee3\u78bc",
+                        "required": true,
+                        "type": "string",
+                        "default": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "SUCCESS,\u6b63\u5e38\u767b\u5165\u60c5\u6cc1",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "description": "\u56de\u50b3\u7d50\u679c(true|false)",
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "code": {
+                                                "description": "\u5b78\u6821(\u55ae\u4f4d)\u4ee3\u78bc",
+                                                "type": "string"
+                                            },
+                                            "checkCode": {
+                                                "description": "\u6aa2\u6838\u78bc",
+                                                "type": "string"
+                                            },
+                                            "name": {
+                                                "description": "\u5b78\u6821(\u55ae\u4f4d)\u540d\u7a31",
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                },
+                                "msg": {
+                                    "description": "\u72c0\u614b\u4ee3\u78bc\u7684\u6587\u5b57\u8aaa\u660e",
+                                    "type": "string"
+                                },
+                                "msgcode": {
+                                    "description": "\u72c0\u614b\u4ee3\u78bc",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "HTTP 401 Error (\u8eab\u5206\u9a57\u8b49\u6388\u6b0a\u5931\u6557)"
+                    },
+                    "403": {
+                        "description": "HTTP 403 Error (\u64cd\u4f5c\u5931\u6557)"
+                    },
+                    "404": {
+                        "description": "HTTP 404 Error (\u67e5\u7121\u6307\u5b9a\u9801\u9762)"
+                    },
+                    "405": {
+                        "description": "HTTP 405 Error (HTTP Request Method\u932f\u8aa4)"
+                    },
+                    "500": {
+                        "description": "HTTP 500 Error (\u4f3a\u670d\u5668\u932f\u8aa4)"
+                    }
+                }
+            }
+        },
+        "/login": {
+            "post": {
+                "tags": [
+                    "APP - \u6703\u54e1"
+                ],
+                "summary": "\u767b\u5165",
+                "description": "\u4f7f\u7528\u55ae\u4f4d\u4ee3\u78bc\u3001\u5e8f\u865f\u3001\u8eab\u5206\u8b49\u9032\u884c\u767b\u5165\uff0c\u767b\u5165\u6210\u529f\u56de\u50b3\u6703\u54e1\u4efb\u52d9\u5b8c\u6210\u60c5\u6cc1\u3001access token\u3001access token expire time\r\n   *      \u6e2c\u8a66\u5e8f\u865f test1~5 \u55ae\u4f4d\u4ee3\u78bc 1111111 \u8eab\u5206\u8b49 A123456789 \r\n   *      \u72c0\u614b\u4ee3\u78bc(000000\u70ba\u6b63\u5e38\uff0c400001\u70ba\u6b04\u4f4d\u4e0d\u9f4a\u5168\uff0c403001\u70ba\u8cc7\u6599\u9a57\u8b49\u5931\u6557 )",
+                "parameters": [
+                    {
+                        "name": "unitCode",
+                        "in": "formData",
+                        "description": "\u55ae\u4f4d\u4ee3\u78bc",
+                        "required": true,
+                        "type": "string",
+                        "default": ""
+                    },
+                    {
+                        "name": "account",
+                        "in": "formData",
+                        "description": "\u5e8f\u865f",
+                        "required": true,
+                        "type": "string",
+                        "default": ""
+                    },
+                    {
+                        "name": "id",
+                        "in": "formData",
+                        "description": "\u8eab\u4efd\u8b49",
+                        "required": true,
+                        "type": "string",
+                        "default": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "SUCCESS,\u6b63\u5e38\u767b\u5165\u60c5\u6cc1",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "description": "\u56de\u50b3\u7d50\u679c(true|false)",
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "properties": {
+                                        "accessToken": {
+                                            "description": "accessToken",
+                                            "type": "string"
+                                        },
+                                        "accessTokenExpireTime": {
+                                            "description": "access token \u5230\u671f\u6642\u9593timestamp",
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/mission": {
+            "get": {
+                "tags": [
+                    "APP - \u4efb\u52d9\u72c0\u614b"
+                ],
+                "summary": "\u4efb\u52d9\u5b8c\u6210\u72c0\u614b",
+                "description": "\u4efb\u52d9(1=\u6f2b\u756b2=\u52d5\u756b3=\u97f3\u6a024=\u756b\u4f5c5=\u97f3\u6a02\u6f14\u594f)\u53ca\u5f69\u86cb extra 1234 \u5b8c\u6210\u72c0\u614b",
+                "responses": {
+                    "200": {
+                        "description": "SUCCESS",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "description": "\u56de\u50b3\u7d50\u679c(true|false)",
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "properties": {
+                                        "mission1": {
+                                            "description": "true \u5df2\u5b8c\u6210 false\u5c1a\u672a\u5b8c\u6210",
+                                            "type": "boolean"
+                                        },
+                                        "mission2": {
+                                            "description": "true \u5df2\u5b8c\u6210 false\u5c1a\u672a\u5b8c\u6210",
+                                            "type": "boolean"
+                                        },
+                                        "mission3": {
+                                            "description": "true \u5df2\u5b8c\u6210 false\u5c1a\u672a\u5b8c\u6210",
+                                            "type": "boolean"
+                                        },
+                                        "mission4": {
+                                            "description": "true \u5df2\u5b8c\u6210 false\u5c1a\u672a\u5b8c\u6210",
+                                            "type": "boolean"
+                                        },
+                                        "mission5": {
+                                            "description": "true \u5df2\u5b8c\u6210 false\u5c1a\u672a\u5b8c\u6210",
+                                            "type": "boolean"
+                                        },
+                                        "extra1": {
+                                            "description": "true \u5df2\u5b8c\u6210 false\u5c1a\u672a\u5b8c\u6210",
+                                            "type": "boolean"
+                                        },
+                                        "extra2": {
+                                            "description": "true \u5df2\u5b8c\u6210 false\u5c1a\u672a\u5b8c\u6210",
+                                            "type": "boolean"
+                                        },
+                                        "extra3": {
+                                            "description": "true \u5df2\u5b8c\u6210 false\u5c1a\u672a\u5b8c\u6210",
+                                            "type": "boolean"
+                                        },
+                                        "extra4": {
+                                            "description": "true \u5df2\u5b8c\u6210 false\u5c1a\u672a\u5b8c\u6210",
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "msg": {
+                                    "description": "\u72c0\u614b\u4ee3\u78bc\u7684\u6587\u5b57\u8aaa\u660e",
+                                    "type": "string"
+                                },
+                                "msgcode": {
+                                    "description": "\u72c0\u614b\u4ee3\u78bc",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "HTTP 401 Error (\u8eab\u5206\u9a57\u8b49\u6388\u6b0a\u5931\u6557)"
+                    },
+                    "403": {
+                        "description": "HTTP 403 Error (\u64cd\u4f5c\u5931\u6557)"
+                    },
+                    "404": {
+                        "description": "HTTP 404 Error (\u67e5\u7121\u6307\u5b9a\u9801\u9762)"
+                    },
+                    "405": {
+                        "description": "HTTP 405 Error (HTTP Request Method\u932f\u8aa4)"
+                    },
+                    "500": {
+                        "description": "HTTP 500 Error (\u4f3a\u670d\u5668\u932f\u8aa4)"
+                    }
+                },
+                "security": [
+                    {
+                        "MyHeaderAuthentication-Authorization": []
+                    }
+                ]
+            }
+        },
+        "/mission/update": {
+            "put": {
+                "tags": [
+                    "APP - \u4efb\u52d9\u72c0\u614b"
+                ],
+                "summary": "\u66f4\u65b0\u4efb\u52d9",
+                "description": "\u66f4\u65b0\u4efb\u52d9  type \u5e3611 \u6e2c\u8a66403\u53c3\u6578\u932f\u8aa4  22\u6e2c\u8a66200\u66f4\u65b0\u6210\u529f\r\n   *        1 = \u6f2b\u756b 2=\u52d5\u756b 3=\u97f3\u6a02 4=\u756b\u4f5c 5=\u97f3\u6a02\u6f14\u594f 6=\u5f69\u86cb\u3002\u4efb\u52d9\u66f4\u65b0\u4e0d\u9700\u4f9d\u7167\u9806\u5e8f\uff0c\u7b2c\u4e00\u6b21\u4efb\u52d9\u5b8c\u6210\u6703\u66ff\u8a72\u5e33\u865f\u8a2d\u5b9aD+3 \u6709\u6548\u671f\uff0c\u904e\u671f\u5247\u7121\u6cd5\u767b\u5165\r\n   *      \u72c0\u614b\u4ee3\u78bc(000000\u70ba\u6b63\u5e38\uff0c400001\u70ba\u6b04\u4f4d\u4e0d\u9f4a\u5168\uff0c403001\u70ba\u8cc7\u6599\u9a57\u8b49\u5931\u6557 )",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "formData",
+                        "description": "1 = \u6f2b\u756b 2=\u52d5\u756b 3=\u97f3\u6a02 4=\u756b\u4f5c 5=\u97f3\u6a02\u6f14\u594f 6=\u5f69\u86cb1 7=\u5f69\u86cb2 8=\u5f69\u86cb3 9=\u5f69\u86cb4",
+                        "required": true,
+                        "type": "integer",
+                        "default": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "SUCCESS,\u6b63\u5e38\u767b\u5165\u60c5\u6cc1",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "description": "\u56de\u50b3\u7d50\u679c(true|false)",
+                                    "type": "boolean"
+                                },
+                                "msg": {
+                                    "description": "\u72c0\u614b\u4ee3\u78bc\u7684\u6587\u5b57\u8aaa\u660e",
+                                    "type": "string"
+                                },
+                                "msgcode": {
+                                    "description": "\u72c0\u614b\u4ee3\u78bc",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "HTTP 401 Error (\u8eab\u5206\u9a57\u8b49\u6388\u6b0a\u5931\u6557)"
+                    },
+                    "403": {
+                        "description": "HTTP 403 Error (\u64cd\u4f5c\u5931\u6557)"
+                    },
+                    "404": {
+                        "description": "HTTP 404 Error (\u67e5\u7121\u6307\u5b9a\u9801\u9762)"
+                    },
+                    "405": {
+                        "description": "HTTP 405 Error (HTTP Request Method\u932f\u8aa4)"
+                    },
+                    "500": {
+                        "description": "HTTP 500 Error (\u4f3a\u670d\u5668\u932f\u8aa4)"
+                    }
+                },
+                "security": [
+                    {
+                        "MyHeaderAuthentication-Authorization": []
+                    }
+                ]
+            }
+        }
+    },
+    "definitions": {},
+    "responses": {
+        "401": {
+            "description": "HTTP 401 Error (\u8eab\u5206\u9a57\u8b49\u6388\u6b0a\u5931\u6557)"
+        },
+        "403": {
+            "description": "HTTP 403 Error (\u64cd\u4f5c\u5931\u6557)"
+        },
+        "404": {
+            "description": "HTTP 404 Error (\u67e5\u7121\u6307\u5b9a\u9801\u9762)"
+        },
+        "405": {
+            "description": "HTTP 405 Error (HTTP Request Method\u932f\u8aa4)"
+        },
+        "500": {
+            "description": "HTTP 500 Error (\u4f3a\u670d\u5668\u932f\u8aa4)"
+        }
+    },
+    "securityDefinitions": {
+        "MyHeaderAuthentication-Authorization": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    }
+}
