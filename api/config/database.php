@@ -1,5 +1,4 @@
 <?php
-require __DIR__ . '/../../inc/_cusconfig.php';
 return [
 
   /*
@@ -33,15 +32,15 @@ return [
     //Default configuration
     'mysql' => [
       'read' => [
-        'host' => $HS_read
+        'host' => env('DB_HOST','localhost')
       ],
       'write' => [
-        'host' => $HS
+        'host' =>  env('DB_HOST','localhost')
       ],
       'driver'    => 'mysql',
-      'database'  => $DB,
-      'username'  => $ID,
-      'password'  => $PW,
+      'database'  =>  env('DATABASE'),
+      'username'  =>  env('DB_NAME','root'),
+      'password'  =>env('DB_PASSWORD',''),
       'charset'   => 'utf8',
       'collation' => 'utf8_unicode_ci',
       'prefix'    => '',

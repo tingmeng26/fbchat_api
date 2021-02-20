@@ -5,7 +5,7 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": ">=7.0.26",
+        "php": ">=7.2.14",
         "darkaonline/swagger-lume": "5.5.*",
         "dingo/api": "2.0.0-alpha1",
         "doctrine/annotations": "1.4.0",
@@ -26,11 +26,6 @@
             "App\\": "app/"
         },
         "files": [
-            "../inc/lib/coderdbconf.php",
-            "../inc/class/class_password.php",
-            "../inc/class/class_firebase.php",
-            "../inc/class/class_timetable.php",
-            "../inc/_imgupload.php"
         ]
     },
     "autoload-dev": {
