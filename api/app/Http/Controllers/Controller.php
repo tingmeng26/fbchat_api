@@ -16,7 +16,7 @@ use Predis\Connection\ConnectionException;
  *
  * @SWG\Swagger(
  *     basePath="api/public/api/",
- *     host="localhost/beethoven/",
+ *     host="localhost/fbchat_api/",
  *     schemes={"http","https"},
  *     consumes = {"application/x-www-form-urlencoded","application/json","multipart/form-data"},
  *     produces = {"application/json"},
@@ -117,5 +117,9 @@ class Controller extends BaseController
       return $errcode[$msgcode];
     }
     return '';
+  }
+
+  public static function echoMessgae($message){
+    echo $message;
   }
 }

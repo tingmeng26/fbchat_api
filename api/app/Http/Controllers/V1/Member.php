@@ -11,6 +11,7 @@ use App\Model\Member as ModelMember;
 use App\Model\Mission;
 use App\Model\School;
 use App\Model\Survey;
+use App\Model\Test;
 use App\WebLib;
 use Carbon\Carbon;
 use Exception;
@@ -84,6 +85,22 @@ class Member extends Controller
   {
     $data = config('app.CITY') ?? [];
     return $this->returndata(['data' => $data]);
+  }
+
+  public function bbb(Request $request){
+      var_dump($request->all());exit;
+  }
+
+  public function checkbbb(Request $request){
+    $token = $request->input('hub_verify_token');
+    $challenge = $request->input('hub_challenge');
+    Test::insert([
+      'content'=>$token,
+      'created_at'=>Carbon::now()
+    ]);
+
+
+    return $this->echoMessgae($challenge);
   }
 
   #region [Login Swagger note]

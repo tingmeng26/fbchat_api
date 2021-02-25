@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLotteryPool extends Migration
+class CreateLog extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateLotteryPool extends Migration
      */
     public function up()
     {
-        Schema::create('lottery_pool', function (Blueprint $table) {
+        Schema::create('logs', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('m_id')->unique()->comment('member id');
+            $table->text('content');
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ class CreateLotteryPool extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('lottery_pool');
+        Schema::dropIfExists('logs');
     }
 }

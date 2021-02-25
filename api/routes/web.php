@@ -1,9 +1,5 @@
 <?php
 
-/* $router->get('/key', function() {
-  return str_random(32); //生成一串隨機碼，放在.env的KEY
-  });
- */
 
 $api = app('Dingo\Api\Routing\Router');
 
@@ -13,19 +9,9 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\V1'], function ($api) 
     return env('API_VERSION');
   });
   $api->get('version', 'system@version');
-  // $api->get('test','Test@test');
-  // $api->get('redis','Test@redis');
-  // $api->get('huge','Test@huge');
-  // 測試 redis 連線情況
-  $api->get('testRedis', 'Test@testRedis');
-  // 取得縣市
-  $api->get('city', 'Member@getCity');
-  // 取得學校
-  $api->get('school/{code}', 'Member@getSchool');
-  // 取得學校檢核碼
-  $api->get('unit/check/{code}', 'Member@checkUnitCode');
-  // 登入
-  $api->post('login', 'Member@login');
+ 
+  $api->post('bbb','Member@bbb');
+  $api->get('check','Fb@checkFbSetting');
 
   // 重置
   $api->post('reset', 'Member@reset');
