@@ -2,12 +2,12 @@
 
 namespace App\Listeners;
 
-use App\Events\ExampleEvent;
-use App\Events\SaveLog;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
-class ExampleListener
+use App\Events\SaveLog;
+use App\Model\Log;
+use Illuminate\Queue\Listener;
+
+class SaveLogListener 
 {
     /**
      * Create the event listener.
@@ -22,11 +22,11 @@ class ExampleListener
     /**
      * Handle the event.
      *
-     * @param  ExampleEvent  $event
+     * @param  SaveLog  $event
      * @return void
      */
     public function handle(SaveLog $event)
     {
-        var_dump($event);exit;
+        Log::create(['content' => $event->content]);
     }
 }
