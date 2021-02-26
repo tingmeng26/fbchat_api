@@ -27,6 +27,6 @@ class SaveLogListener
      */
     public function handle(SaveLog $event)
     {
-        Log::create(['content' => $event->content]);
+      Log::create(['content' => $event->content]);
     }
 }

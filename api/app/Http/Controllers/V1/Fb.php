@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\V1;
 
-
+use App\Events\ExampleEvent;
 use App\Events\SaveLog;
+use App\Events\SaveLogEvent;
 use \App\Http\Controllers\Controller;
 use App\Model\Log;
+use Illuminate\Events\Dispatcher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Event;
@@ -44,8 +46,9 @@ class Fb extends Controller
 
     $data = $request->all();
     // event(new SaveLog('test event'));
-    Event::fire(new SaveLog('jjjj'));
-    event(new SaveLog('fukkk'));
+    // event(new SaveLog('fukkk'));
+    // event(new ExampleEvent('fu'));
+    event(new SaveLog('error message'));
     // Log::create(['content'=>'fuck!']);
     
     // Log::create([
