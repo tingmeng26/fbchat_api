@@ -5,6 +5,7 @@ namespace App\Http\Controllers\V1;
 use App\Events\ExampleEvent;
 use App\Events\SaveLog;
 use App\Events\SaveLogEvent;
+use App\func;
 use \App\Http\Controllers\Controller;
 use App\Model\Log;
 use Illuminate\Events\Dispatcher;
@@ -43,21 +44,37 @@ class Fb extends Controller
 
   public function processMessage(Request $request)
   {
-
     $data = $request->all();
-    // event(new SaveLog('test event'));
-    // event(new SaveLog('fukkk'));
-    // event(new ExampleEvent('fu'));
-    event(new SaveLog('error message'));
-    // Log::create(['content'=>'fuck!']);
+    event(new SaveLog(json_encode($data)));
+    $recipient = $data['entry'][0]['messaging'][0]['sender']['id'] ?? '';
+    // 有text物件表示使用者輸入文字
+    $text = $data['entry'][0]['messaging'][0]['message']['text'] ?? '';
+    // 有postback物件表示使用者透過按鈕互動
+    $payload =  $data['entry'][0]['messaging'][0]['postback']['payload'] ?? '';
+    $message = [];
+    $message['recipient'] = ['id' => $recipient];
+    // if (!in_array($text, ['測驗'])) {
+    //   $message['message'] =  Helper::textTemplate('你打錯囉！請重新輸入');
+    //   $result = Helper::sendMessage($message);
+    //   return $this->returndata(['data' => $result]);
+    // }
+    // 判斷為留言
+    if(!empty($text)){
+      $response = Helper::processText($text);
+    }elseif(!empty($payload)){
+      $response = Helper::processPayload($payload);
+    }
     
-    // Log::create([
-    //   'content'=>json_encode($data)
-    // ]);
-    $recipient = $data['entry'][0]['messaging'][0]['recipient']['id']??'';
-    $text = $data['entry'][0]['messaging'][0]['message']['text']??'';
-    // Log::create([
-    //   'content'=>$recipient.$text
-    // ]);
+
+    $response = Helper::getMessage($text);
+    foreach($response as $row){
+      $row['recipient'] = ['id' => $recipient];
+      Helper::sendMessage($row);
+    }
+    // $response[0]['recipient'] = ['id' => $recipient];
+    // var_dump($response[0]);exit;
+    // $message['messaging_type'] = 'RESPONSE';
+
+    // return $this->returndata(['data' => $result]);
   }
 }
