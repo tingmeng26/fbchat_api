@@ -22,24 +22,24 @@ class Fb extends Controller
     $token = $request->input('hub_verify_token');
     $challenge = $request->input('hub_challenge');
     $verifyToken = env('HUB_VERIFY_TOKEN', null);
-    Log::insert([
-      'content' => $verifyToken
-    ]);
+    // Log::insert([
+    //   'content' => $verifyToken
+    // ]);
     if ($token != env('HUB_VERIFY_TOKEN')) {
-      Log::insert([
-        'content' => "token:$token
-        /challenge:$challenge/
-        check fb verify token failed.",
+      // Log::insert([
+      //   'content' => "token:$token
+      //   /challenge:$challenge/
+      //   check fb verify token failed.",
 
-        'created_at' => Carbon::now()
-      ]);
+      //   'created_at' => Carbon::now()
+      // ]);
       $challenge = '';
     } else {
-      Log::insert([
-        'content' => "$challenge/success",
+      // Log::insert([
+      //   'content' => "$challenge/success",
 
-        'created_at' => Carbon::now()
-      ]);
+      //   'created_at' => Carbon::now()
+      // ]);
     }
     return $this->echoMessgae($challenge);
   }
@@ -47,7 +47,7 @@ class Fb extends Controller
   public function processMessage(Request $request)
   {
     $data = $request->all();
-    event(new SaveLog(json_encode($data)));
+    // event(new SaveLog(json_encode($data)));
     $recipient = $data['entry'][0]['messaging'][0]['sender']['id'] ?? '';
     // 有text物件表示使用者輸入文字
     $text = $data['entry'][0]['messaging'][0]['message']['text'] ?? '';
@@ -68,7 +68,7 @@ class Fb extends Controller
     // }
 
     $text = empty($text)?$payload:$text;
-    event(new SaveLog($text));
+    // event(new SaveLog($text));
       // event(SaveLog())
     $response = Helper::getMessage($text);
     foreach ($response as $row) {
@@ -80,5 +80,10 @@ class Fb extends Controller
     // $message['messaging_type'] = 'RESPONSE';
 
     // return $this->returndata(['data' => $result]);
+  }
+
+
+  public function test(){
+    var_dump(123);exit;
   }
 }
