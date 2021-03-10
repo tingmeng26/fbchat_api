@@ -8,9 +8,11 @@ use App\Events\SaveLogEvent;
 use App\func;
 use \App\Http\Controllers\Controller;
 use App\Model\Log;
+use App\Model\Test;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 
 class Fb extends Controller
@@ -59,15 +61,17 @@ class Fb extends Controller
     //   return $this->returndata(['data' => $result]);
     // }
     // 判斷為留言
-    if(!empty($text)){
-      $response = Helper::processText($text);
-    }elseif(!empty($payload)){
-      $response = Helper::processPayload($payload);
-    }
-    
+    // if (!empty($text)) {
+    //   $response = Helper::processText($text);
+    // } elseif (!empty($payload)) {
+    //   $response = Helper::processPayload($payload);
+    // }
 
+    $text = empty($text)?$payload:$text;
+    event(new SaveLog($text));
+      // event(SaveLog())
     $response = Helper::getMessage($text);
-    foreach($response as $row){
+    foreach ($response as $row) {
       $row['recipient'] = ['id' => $recipient];
       Helper::sendMessage($row);
     }
